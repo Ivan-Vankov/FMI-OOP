@@ -59,7 +59,7 @@
 *   Изход от програмата - quit
 
 Направете прост (но използваем) конзолен интерфейс, който да предоставя описаните възможности. Пример за работа със системата е:
-
+```
 $: Admin add_user Pesho 21
 Pesho created.
 $: Pesho post [url] http://www.example.com Някакъв пример.
@@ -124,3 +124,4 @@ HTML view for all Gencho’s posts created.
 $: delete system
 Unknown command!
 $: quit
+```
