@@ -1,5 +1,6 @@
 #ifndef _UNKNOWNCELL_HEADER_
 #define _UNKNOWNCELL_HEADER_
+#include "TableDelegate.h"
 #include "Cell.h"
 
 class UnknownCell : public Cell {
@@ -7,10 +8,11 @@ public:
 	UnknownCell(const String& = "");
 	virtual ~UnknownCell();
 
-	virtual int getLength() const;
-	virtual String getContent() const;
-	virtual String getValue() const;
-	virtual void printCell() const;
+	int getLength() const override;
+	String getContent() const override;
+	String getValue() const override;
+	void printCell() const override;
+	Cell* clone() const override;
 private:
 	String content;
 };

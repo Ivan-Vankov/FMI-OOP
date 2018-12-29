@@ -1,5 +1,6 @@
 #ifndef _STRINGCELL_HEADER_
 #define _STRINGCELL_HEADER_
+#include "TableDelegate.h"
 #include "Cell.h"
 
 class StringCell : public Cell {
@@ -9,10 +10,11 @@ public:
 	StringCell& operator=(const StringCell&);
 	virtual ~StringCell();
 
-	virtual int getLength() const;
-	virtual String getContent() const;
-	virtual String getValue() const;
-	virtual void printCell() const;
+	int getLength() const override;
+	String getContent() const override;
+	String getValue() const override;
+	void printCell() const override;
+	Cell* clone() const override;
 
 	static bool verifyData(const String& content);
 private:

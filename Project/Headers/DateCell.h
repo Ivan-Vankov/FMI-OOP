@@ -3,6 +3,7 @@
 #include "Cell.h"
 #include "Date.h"
 #include "Vector.h"
+#include "TableDelegate.h"
 
 class DateCell : public Cell {
 public:
@@ -11,10 +12,11 @@ public:
 	DateCell& operator=(const DateCell&);
 	virtual ~DateCell();
 
-	virtual int getLength() const;
-	virtual String getContent() const;
-	virtual String getValue() const;
-	virtual void printCell() const;
+	int getLength() const override;
+	String getContent() const override;
+	String getValue() const override;
+	void printCell() const override;
+	Cell* clone() const override;
 
 	static bool verifyData(const String& content);
 private:

@@ -22,22 +22,11 @@ Cell* CellFactory::createCell(int row, int coll, const String& newCellContent, c
 }
 
 Cell* CellFactory::cloneCell(const Cell* cell, const TableDelegate* newOriginTable) {
-	if (!cell) {
-		return nullptr;
-	}
-	if (dynamic_cast<const NumberCell*>(cell)) {
-		return new NumberCell(cell->getContent());
-	}
-	if (dynamic_cast<const StringCell*>(cell)) {
-		return new StringCell(cell->getContent());
-	}
-	if (dynamic_cast<const DateCell*>(cell)) {
-		return new DateCell(cell->getContent());
-	}
 	const FormulaCell* formulaCell = dynamic_cast<const FormulaCell*>(cell);
 	if (formulaCell) {
-		return new FormulaCell(formulaCell->getRow(), formulaCell->getColl(), 
-			formulaCell->getContent(), newOriginTable);
+		return formulaCell->clone(newOriginTable);
 	}
-	return new UnknownCell(cell->getContent());
+	else {
+		return cell->clone();
+	}
 }

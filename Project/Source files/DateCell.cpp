@@ -56,6 +56,10 @@ void DateCell::printCell() const {
 	std::cout << content;
 }
 
+Cell* DateCell::clone() const {
+	return new DateCell(*this);
+}
+
 bool DateCell::verifyData(const String& content) {
 	int dotCnt = 0;
 	Vector<String> nums(3);

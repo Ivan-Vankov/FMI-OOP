@@ -29,3 +29,9 @@ void UnknownCell::printCell() const {
 		std::cout << "ERROR";
 	}
 }
+
+
+
+Cell* UnknownCell::clone() const {
+	return new UnknownCell(*this);
+}

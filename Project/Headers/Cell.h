@@ -11,6 +11,7 @@ public:
 	// Returns how much space the cell takes up: 123 -> 3; "123" -> 3
 	virtual int getLength() const = 0;
 	virtual void printCell() const = 0;
+	virtual Cell* clone() const = 0;
 	virtual ~Cell() {};
 };
 

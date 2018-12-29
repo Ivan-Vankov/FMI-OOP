@@ -2,8 +2,11 @@
 
 const String FormulaCell::OPERATORS("^*/+-()");
 
-FormulaCell::FormulaCell(const FormulaCell& input) : row(input.row), coll(input.coll), 
-content(input.content), table(input.table) {}
+FormulaCell::FormulaCell(const FormulaCell& rhs) : row(rhs.row), coll(rhs.coll),
+content(rhs.content), table(rhs.table) {}
+
+FormulaCell::FormulaCell(const FormulaCell& rhs, const TableDelegate* newTable) : row(rhs.row), coll(rhs.coll),
+content(rhs.content), table(newTable) {}
 
 FormulaCell::FormulaCell(int row, int coll, const String& input, const TableDelegate* originTable) {
 	if (!verifyData(input)) {
@@ -52,6 +55,14 @@ String FormulaCell::getValue() const {
 
 void FormulaCell::printCell() const {
 	std::cout << getValue();
+}
+
+Cell* FormulaCell::clone() const {
+	return new FormulaCell(*this);
+}
+
+Cell* FormulaCell::clone(const TableDelegate* newTable) const {
+	return new FormulaCell(*this, newTable);
 }
 
 const TableDelegate* FormulaCell::getOriginTable() const {

@@ -48,6 +48,10 @@ void NumberCell::printCell() const {
 	std::cout << content;
 }
 
+Cell* NumberCell::clone() const {
+	return new NumberCell(*this);
+}
+
 bool NumberCell::verifyData(const String& content) {
 	if (content.countWords() > 1) {
 		return false;

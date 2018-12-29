@@ -13,6 +13,7 @@
 class FormulaCell : public Cell {
 public:
 	FormulaCell(const FormulaCell&);
+	FormulaCell(const FormulaCell&, const TableDelegate* newTable);
 	FormulaCell(int row, int coll, const String&, const TableDelegate*);
 	FormulaCell& operator=(const FormulaCell&);
 	virtual ~FormulaCell();
@@ -20,10 +21,13 @@ public:
 	int getRow() const;
 	int getColl() const;
 
-	virtual String getContent() const;
-	virtual String getValue() const;
-	virtual int getLength() const;
-	virtual void printCell() const;
+	String getContent() const override;
+	String getValue() const override;
+	int getLength() const override;
+	void printCell() const override;
+	Cell* clone() const override;
+	Cell* clone(const TableDelegate* newTable) const;
+
 	const TableDelegate* getOriginTable() const;
 
 	static bool verifyData(const String& content);

@@ -28,14 +28,14 @@ public:
 	Table& operator=(const Table&);
 	~Table();
 
-	virtual void removeLine(int);
-	virtual int getLongestLine() const;
-	virtual int getLinesAmount() const;
-	virtual const Vector<Cell*>& lineToVector(int) const;
-	virtual const Vector<Cell*>& operator[](int) const;
-	virtual double getCellValue(int row, int col) const;
+	void removeLine(int) override;
+	int getLongestLine() const override;
+	int getLinesAmount() const override;
+	const Vector<Cell*>& lineToVector(int) const override;
+	const Vector<Cell*>& operator[](int) const override;
+	double getCellValue(int row, int col) const override;
 
-	virtual const Cell* getCell(const String&) const;
+	const Cell* getCell(const String&) const override;
 	void setCell(const String& RandC, const String& content);
 
 	void readFile(const String&);

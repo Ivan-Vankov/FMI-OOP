@@ -88,6 +88,10 @@ void StringCell::printCell() const {
 	}
 }
 
+Cell* StringCell::clone() const {
+	return new StringCell(*this);
+}
+
 bool StringCell::verifyData(const String& content) {
 	int cellLength = content.getLength();
 	if (cellLength == 1) {//  "  <- tozi sluchai
