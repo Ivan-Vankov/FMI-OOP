@@ -57,11 +57,11 @@ inline void Vector<T>::add(int index, const T& value) {
 		throw std::out_of_range("Invalid index at Vector::add(int, const T&).");
 	}
 	T* beg = new T[index];
-	for (int i = 0; i < index; ++i) {//kopirat se pyrvite T-ta
+	for (int i = 0; i < index; ++i) {
 		beg[i] = arr[i];
 	}
 	T* end = new T[size - index];
-	for (int j = index, i = 0; j < size; ++j, ++i) {//kopirat se poslednite T-ta
+	for (int j = index, i = 0; j < size; ++j, ++i) {
 		end[i] = arr[j];
 	}
 	if (size == allocSize) {
@@ -72,10 +72,10 @@ inline void Vector<T>::add(int index, const T& value) {
 	}
 	arr[index] = value;
 	++size;
-	for (int i = 0; i < index; ++i) {//vryshtat se pyrvite T-ta
+	for (int i = 0; i < index; ++i) {
 		arr[i] = beg[i];
 	}
-	for (int j = index + 1, i = 0; j < size; ++j, ++i) {//vryshtat se poslednite T-ta
+	for (int j = index + 1, i = 0; j < size; ++j, ++i) {
 		arr[j] = end[i];
 	}
 	delete[] beg;
@@ -117,8 +117,8 @@ inline void Vector<T>::removeWithNoShuffle(int index) {
 		std::cerr << "Invalid index at Vector::removeWithNoShuffle(int).";;
 		return;
 	}
-	if (size--) {//ako ima elementi za prenarejdane
-		for (int i = index; i < size; ++i) {//se prenarejdat v reda, v koito sa bili predi
+	if (size--) {
+		for (int i = index; i < size; ++i) {
 			arr[i] = arr[i + 1];
 		}
 	}

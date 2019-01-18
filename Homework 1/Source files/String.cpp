@@ -30,7 +30,7 @@ String& String::operator=(String const& other){
 
 
 String::~String(){
-	delete[] arr;//ne e free()
+	delete[] arr;
 	arr = NULL;
 	allocSize = 0;
 	length = 0;
@@ -51,13 +51,13 @@ void String::removeUnnecessarySymbols(const String& delims){
 	int wordCount = countWords();
 	int wordCounter = 0;
 	do{
-		while (arr[i] && delims.isIn(arr[i])){//skipva delimovete
+		while (arr[i] && delims.isIn(arr[i])){
 			++i;
 		}
-		while (arr[i] && !delims.isIn(arr[i])){//addva simvolite
+		while (arr[i] && !delims.isIn(arr[i])){
 			buffer.add(arr[i++]);
 		}
-		if (++wordCounter < wordCount){//slaga ' ' na vsqko mqsto osven poslednoto
+		if (++wordCounter < wordCount){
 			buffer.add(' ');
 		}
 	} while (arr[i++]);
@@ -70,15 +70,15 @@ int String::countWords()const{
 	int cnt = 0;
 	String delims("\t ");
 	int i = 0;
-	while (arr[i]){//  ab  cd   //
-		while (arr[i] && delims.isIn(arr[i])){//skipva delimovete
+	while (arr[i]){
+		while (arr[i] && delims.isIn(arr[i])){
 			++i;
 		}
 		if (arr[i] && !delims.isIn(arr[i])){
 			++cnt;
 			++i;
 		}
-		while (arr[i] && !delims.isIn(arr[i])){//skipva dumite
+		while (arr[i] && !delims.isIn(arr[i])){
 			++i;
 		}
 	}
@@ -105,11 +105,10 @@ void String::copyFrom(String const & other){
 void String::readLine(std::istream& is){
 	char c;
 	while (is.get(c) && c != '\n'){
-		if ((length + 1) >= allocSize){//+1 zaradi '/0'
+		if ((length + 1) >= allocSize){
 			reallocate(allocSize ? allocSize * 2 : 2);
 		}
 		arr[length++] = c;
-		//add(c);
 	}
 	if (length){
 		arr[length] = '\0';
@@ -119,7 +118,7 @@ void String::readLine(std::istream& is){
 void String::free(){
 	delete[] arr;
 	arr = new char;
-	arr[0] = '\0';//ne NULL zashtoto while(arr[0]) kato arr==NULL dava error
+	arr[0] = '\0';
 	allocSize = 1;
 	length = 0;
 }
@@ -150,7 +149,7 @@ void String::cutAfter(int n){
 
 void String::reallocate(int newAllocSize){
 	char* temp = new char[newAllocSize];
-	for (int i = 0; i <= length; i++){///////////////////////////////////////////////vnimavai za =noto
+	for (int i = 0; i <= length; i++){
 		temp[i] = arr[i];
 	}
 	delete[] arr;
@@ -160,7 +159,7 @@ void String::reallocate(int newAllocSize){
 
 
 void String::add(char element){
-	if ((length + 1) >= allocSize){//+1 zaradi '/0'
+	if ((length + 1) >= allocSize){
 		reallocate(allocSize ? allocSize * 2 : 2);
 	}
 	arr[length++] = element;
@@ -169,13 +168,13 @@ void String::add(char element){
 	}
 }
 
-void String::remove(int index){//"1"
+void String::remove(int index){
 	if (index >= length || index < 0){
 		std::cerr << "Invalid index at String::remove.";;
 		return;
 	}
-	if (length--){//ako ima simvoli za prenarejdane
-		for (int i = index; i <= length; ++i){//se prenarejdat v reda, v koito sa bili predi
+	if (length--){
+		for (int i = index; i <= length; ++i){
 			arr[i] = arr[i + 1];
 		}
 	}
@@ -231,24 +230,24 @@ String String::wordNumber(int index)const{
 	}
 
 	int cnt = 0;
-	String delims("\t \n");///////////////pochti syshtoto kato cntWords
+	String delims("\t \n");
 	int i = 0;
-	while (cnt != index){//  ab  cd   //
-		while (arr[i] && delims.isIn(arr[i])){//skipva delimovete
+	while (cnt != index){
+		while (arr[i] && delims.isIn(arr[i])){
 			++i;
 		}
 		if (arr[i] && !delims.isIn(arr[i])){
 			++cnt;
 		}
 		if (cnt != index){
-			while (arr[i] && !delims.isIn(arr[i])){//skipva dumite
+			while (arr[i] && !delims.isIn(arr[i])){
 				++i;
 			}
 		}
 	}
 
 	int j = i;
-	while (/*arr[i] != ' ' && arr[i] != '\t'*/!delims.isIn(arr[i]) && arr[i]){
+	while (!delims.isIn(arr[i]) && arr[i]){
 		++i;
 	}
 	String word;
