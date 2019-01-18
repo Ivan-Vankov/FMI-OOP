@@ -46,7 +46,7 @@ public:
 	String& operator+(const char*);
 	String& operator+(const String &);
 
-	String wordNumber(int)const;//vryshta dumata na indeks - podadenoto 4islo(zapochvaiki s 1,2,3...)
+	String wordNumber(int)const;
 
 private:
 	void reallocate(int NewSize);

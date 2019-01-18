@@ -47,7 +47,7 @@ private:
 	void reallocate(int NewSize);
 	void copyFrom(const String &);
 public:
-	String wordNumber(int)const;//vryshta dumata na indeks - podadenoto 4islo(zapochvaiki s 1,2,3...
+	String wordNumber(int)const;
 private:
 	char* arr;
 	int allocSize;
