@@ -92,38 +92,33 @@ void Parser::editcell(Tables& openedFiles, const String& input, int wordCount) {
 		}
 		wordCount = 4;
 	}
-	//kak da se zameni wordCount == 3
-	//editcell "asf ""as" "zel bebka kek"
-	//editcell R0C0 R1C1 "ayy lmao" //ne moje da se zameni s prowerka na duma 2 i 3 zashtoto dvete mogat da sa
-	//filepaths i RandC-s ednovremenno
-	//editcell R0C0 R1C1 "ay\" l\"mao" 
-	if (openedFiles.size() == 0) {// kato nqma otvoren fajl
+	if (openedFiles.size() == 0) {
 		std::cerr << "There are no opened files to edit a cell in.\n";
 		return;
 	}
-	if (openedFiles.size() > 1 && wordCount == 3) {// editcell R<num>C<num> "abc"(kato ima poveche ot 1 otvoren fajl)
+	if (openedFiles.size() > 1 && wordCount == 3) {
 		std::cerr << "You have to specify which of the opened files to edit a cell in.\n";
 		return;
 	}
 
 	int inputLength = input.getLength();
-	if (wordCount == 3) {//kato ima tochno 1 otvoren fail
+	if (wordCount == 3) {
 		path = toPath(openedFiles.firstFilename());
 		RandC = input.wordNumber(2);
 		String temp = input.wordNumber(3);
-		if (temp[0] != '\"') {//ako 3tata duma ne e potencialen String
+		if (temp[0] != '\"') {
 			cellContent = temp;
 		}
 	}
 	else {
-		path = toPath(input.wordNumber(2));//kato ima >1 otvoren fail
+		path = toPath(input.wordNumber(2));
 		if (!openedFiles.tableIsOpened(path)) {
 			std::cerr << "File " << path << " in not opened.\n";
 			return;
 		}
 		RandC = input.wordNumber(3);
 		String temp = input.wordNumber(4);
-		if (temp[0] != '\"') {//ako 4tata duma ne e potencialen String
+		if (temp[0] != '\"') {
 			cellContent = temp;
 		}
 	}
@@ -131,12 +126,12 @@ void Parser::editcell(Tables& openedFiles, const String& input, int wordCount) {
 	int RandCLength = RandC.getLength();
 	if (RandCLength < 4 || RandC[0] != 'R' || !(RandC[1] >= '0' && RandC[1] <= '9')) {
 		std::cerr << "Incorrect row and column.\n";
-		return;//posledniq sluchai na if-a e tuk zashtoto inache dolniq for moje da prihvane RC<num> za vqrno
+		return;
 	}
-	for (int i = 2; i < RandCLength; ++i) {//razglejda dali e pravilno RandC-to
+	for (int i = 2; i < RandCLength; ++i) {
 		if (RandC[i] == 'C') {
 			int j = i + 1;
-			if (j == RandCLength) {// R<num>C sluchaq
+			if (j == RandCLength) {
 				std::cerr << "Incorrect row and column.\n";
 				return;
 			}
@@ -148,7 +143,7 @@ void Parser::editcell(Tables& openedFiles, const String& input, int wordCount) {
 			}
 			break;
 		}
-		if (!(RandC[i] >= '0' && RandC[i] <= '9')) {// R<!num> sluchaq
+		if (!(RandC[i] >= '0' && RandC[i] <= '9')) {
 			std::cerr << "Incorrect row and column.\n";
 			return;
 		}

@@ -21,9 +21,8 @@ StringCell::~StringCell() {
 }
 
 int StringCell::getLength() const {
-	//return content.getLength();///////////////////moje da ima \t v content koeto da se broi za nqkolko space-a 
 	int contentLength = strlen(content) - 1;
-	String tempContent(content);//za da ne trie '\\' ot istinskiq content
+	String tempContent(content);
 	int charCounter = 0;
 	for (int i = 1; i < contentLength; ++i) {
 		if (tempContent[i] == '\\') {
@@ -43,17 +42,17 @@ String StringCell::getValue() const {
 		return "0";
 	}
 	String allowedFirstSymbol("0123456789+-.");
-	if (!allowedFirstSymbol.isIn(content[1])) {//proverqva pyrvi simvol(sled \")
+	if (!allowedFirstSymbol.isIn(content[1])) {
 		return "0";
 	}
-	int contentLength = content.getLength() - 1;//bez poslednoto \"
+	int contentLength = content.getLength() - 1;
 	int dotCounter = 0;
-	int i = 1;//index za obhojdane na content
+	int i = 1;
 	if (content[0] == '+' || content[0] == '-') {
 		++i;
 	}
 	for (; i < contentLength; ++i) {
-		if (!((content[i] >= '0' && content[i] <= '9') || content[i] == '.')) {//proverqva vseki simvol dali e 0,1,..,9 ili .
+		if (!((content[i] >= '0' && content[i] <= '9') || content[i] == '.')) {
 			return "0";
 		}
 		if (content[i] == '.') {
@@ -80,7 +79,7 @@ void StringCell::printCell() const {
 	// -1 in order to skip the last \"
 	int contentLength = strlen(content) - 1;
 	// From 1 in order to skjip the first \"
-	for (int i = 1; i < contentLength; ++i) {// ot 1 zashtoto pyrvoto \" se skipva
+	for (int i = 1; i < contentLength; ++i) {
 		if (content[i] == '\\') {
 			++i;
 		}
@@ -94,26 +93,26 @@ Cell* StringCell::clone() const {
 
 bool StringCell::verifyData(const String& content) {
 	int cellLength = content.getLength();
-	if (cellLength == 1) {//  "  <- tozi sluchai
+	if (cellLength == 1) {
 		return false;
 	}
-	if (!(content[0] == '\"' && content[cellLength - 1] == '\"')) {//ako ne zapochva ili ne zavyrshva na "
+	if (!(content[0] == '\"' && content[cellLength - 1] == '\"')) {
 		return false;
 	}
 	int end = cellLength - 2;
-	if (content[end] == '\\') {// "...\" sluchaq(zashtoto v obshtata proverka end+1 = '\"' i minava)
+	if (content[end] == '\\') {
 		return false;
 	}
 	String specSymbols = "\'\"";
-	for (int start = 1; start <= end; ++start) {//ako ima samichko ",' ili \ nqkyde(<end zashtoto \ v [end] e provereno veche)
-		if (specSymbols.isIn(content[start]) && content[start - 1] != '\\') {//za ",'
+	for (int start = 1; start <= end; ++start) {
+		if (specSymbols.isIn(content[start]) && content[start - 1] != '\\') {
 			return false;
 		}
-		if (content[start] == '\\' && content[start + 1] == '\\') {//ako ima pravilno "\\"
+		if (content[start] == '\\' && content[start + 1] == '\\') {
 			++start;
-			continue;//zashtoto nqma nujda ot sledvashtata proverka ako e veren tozi if
+			continue;
 		}
-		else if (content[start] == '\\' && !(specSymbols.isIn(content[start + 1]))) {//za '\'
+		else if (content[start] == '\\' && !(specSymbols.isIn(content[start + 1]))) {
 			return false;
 		}
 	}
